@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./reset.css">
+    <link rel="stylesheet" href="./upload.css">
+    <title>Title</title>
+</head>
+<body>
+    <div class="content">
+            <p class="title">佛山音乐节音乐人作品上传</p>
+        <div class="uploadFormBox">
+            <div class="uploadFormTitle">
+                <p>作品上传</p>
+                <p class="addMusic">+增加一首歌曲</p>
+            </div>
+            <div class="uploadFormList">
+                <p class="uploadFormListItem">
+                    <label for="musicName" >歌曲名<span class="ufRequired">*</span></label>
+                    <input id="musicName" class="ufInput" type="text">
+                </p>
+                <p class="uploadFormListItem">
+                    <label for="recordAuthor">录音制作者<span class="ufRequired">*</span></label>
+                    <input id="recordAuthor" class="ufInput" type="text">
+                </p>
+            </div>
+            <div class="uploadFormList">
+                <p class="uploadFormListItem">
+                    <label for="wordAuthor">词作者<span class="ufRequired">*</span></label>
+                    <input id="wordAuthor" placeholder="请填写艺名" class="ufInput" type="text">
+                </p>
+                <p class="uploadFormListItem">
+                    <label for="musicAuthor">曲作者<span class="ufRequired">*</span></label>
+                    <input id="musicAuthor" placeholder="请填写艺名" class="ufInput" type="text">
+                </p>
+            </div>
+            <div class="uploadFormList">
+                <p class="uploadFormListItem">
+                    <label for="singer">演唱者<span class="ufRequired">*</span></label>
+                    <input id="singer" placeholder="请填写艺名" class="ufInput" type="text">
+                </p>
+                <div class="uploadFormListItem">
+                    <label >演唱者类型<span class="ufRequired">*</span></label>
+                    <!--<select id="singerType" class="ufInput ufSelect" >-->
+                        <!--<option value="">男歌手</option>-->
+                        <!--<option value="">女歌手</option>-->
+                    <!--</select>-->
+                    <ul id="select" >
+                        <li>
+                            <div class="select-head">
+                                <span class="select-head-cont"></span>
+                                <span class="select-icon"><img src="./jian.png" alt=""></span>
+                            </div>
+                            <ul class="option">
+                                <li class="option-item">chrome</li>
+                                <li class="option-item">safari</li>
+                                <li class="option-item">Edge</li>
+                                <li class="option-item">firefox</li>
+                                <li class="option-item">ie8</li>
+                            </ul>
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="uploadFormButton">
+                <label >歌曲<span class="ufRequired">*</span></label>
+                <div class="uploadButtonBox">
+                        <a href="javascript:;" class="ufFile">+选择本地文件
+                            <input type="file" name="">
+                        </a>
+                    <p>注:要求MP3,音频码率不低于320kbps,采样频率不低于44100Hz</p>
+                </div>
+            </div>
+            <div class="uploadFormButton">
+                <label >歌词<span class="ufRequired">*</span></label>
+                <div class="uploadButtonBox">
+                        <a href="javascript:;" class="ufFile">+选择本地文件
+                            <input type="file" name="" >
+                        </a>
+                    <p>注:歌词请用TXT文件格式：纯音乐作品TXT文件中写明"纯音乐"</p>
+                </div>
+            </div>
+            <div class="uploadAgree">
+                <div class="ufCheckBox">
+                    <span><input type="checkbox"class="input_check" id="check3"><label for="check3"></label></span>
+                </div>
+                <p >我已阅读并同意<span style="color:#e40077">《咪咕音乐人版权承诺书》</span></p>
+            </div>
+            <div class="uploadFormSubmit">
+                <div class="ufSave ufButton">保存</div>
+                <div class="ufSubmit ufButton">提交</div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    //int
+    var flag=false;
+    var selectHead = document.getElementsByClassName('select-head')[0];
+    var selectHeadCont = document.getElementsByClassName('select-head-cont');
+    var Option = document.getElementsByClassName('option')[0];
+    var optionItem = document.getElementsByClassName('option-item');
+
+    /*默认是第一个选项*/
+    selectHeadCont[0].innerHTML = optionItem[0].innerHTML;
+
+    /*点击后出现下拉框*/
+    selectHead.addEventListener('click',function(ev){
+        var oEvent = ev || event;
+
+        //js阻止事件冒泡
+        oEvent.cancelBubble = true;
+        oEvent.stopPropagation();
+        if(flag){
+            flag=false;
+            Option.style.display = 'none';
+        }else {
+            flag=true;
+            Option.style.display = 'block';
+        }
+        console.log(flag)
+    },false);
+    /*点击选项后出现在下拉框*/
+    var len = optionItem.length;
+    for(var i=0;i<len;i++){
+        optionItem[i].index = i;
+        optionItem[i].addEventListener('click',function(ev){
+            var oEvent = ev || event;
+
+            //js阻止事件冒泡
+            oEvent.cancelBubble = true;
+            oEvent.stopPropagation();
+            selectHeadCont[0].innerHTML = optionItem[this.index].innerHTML;
+            Option.style.display = 'none';
+            flag=false;
+        },false);
+    }
+    /*点击其他地方时，select会收起来*/
+    document.body.addEventListener('click',function(ev){
+        var oEvent = ev || event;
+        //js阻止事件冒泡
+        oEvent.cancelBubble = true;
+        oEvent.stopPropagation();
+        Option.style.display = 'none';
+        flag=false;
+    },false);
+
+</script>
+</html>
