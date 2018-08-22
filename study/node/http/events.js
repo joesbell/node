@@ -9,7 +9,7 @@ var warter = function (params) {
 // life.removeListener('test1',warter)
 
 // console.log(a1,a2);
-
+console.log(Number("20"));
 
 life.on('test1', warter)
 life.on('test1', function (params) {

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style lang="">
+        .ball{
+            width: 40px;
+            height: 40px;
+            border-radius: 100%
+        }
+        .ball1{
+            background: red
+        }
+        .ball2{
+            background: greenyellow
+        }
+        .ball3{
+            background: black
+        }
+    </style>
+</head>
+<body>
+    <div class="ball ball1"  style="margin-left: 0px"></div>
+    <div class="ball ball2"  style="margin-left: 0px"></div>
+    <div class="ball ball3"  style="margin-left: 0px"></div>
+</body>
+<script>
+    let ball1=document.querySelector(".ball1")
+    let ball2 = document.querySelector(".ball2")
+    let ball3 = document.querySelector(".ball3")
+
+    // function animate(ball,dis,cb) {
+    //     setTimeout(() => {
+    //         var ml=parseInt(ball.style.marginLeft,10)
+    //         if(ml===dis){
+    //             cb&&cb()
+    //         }else{
+    //             if(ml<dis){
+    //                 ml++
+    //             }else{
+    //                 ml--
+    //             }
+    //             ball.style.marginLeft=ml+"px"
+    //             animate(ball,dis,cb)
+    //         }
+    //     }, 13);
+        
+    // }
+    // animate(ball1,100,function () {
+    //     animate(ball2,200,function () {
+    //         animate(ball3,300,function () {
+    //             animate(ball3,50,function(){
+    //                 animate(ball2,50,function(){
+    //                     animate(ball1,50,function(){
+                            
+    //                     })
+    //                 })
+    //             })
+    //         })
+    //     })
+    // })
+    function promiseAnimate(ball,dis) {
+        return new Promise(function (resolve,reject) {
+            function _animate(ball,dis) {
+                setTimeout(() => {
+                    var ml = parseInt(ball.style.marginLeft, 10)
+                    if (ml === dis) {
+                        resolve()
+                    } else {
+                        if (ml < dis) {
+                            ml++
+                        } else {
+                            ml--
+                        }
+                        ball.style.marginLeft = ml + "px"
+                        _animate(ball, dis)
+                    }
+                }, 13);
+
+            }
+            _animate(ball,dis)
+        })
+    }
+
+    // promiseAnimate(ball1,100)
+    //     .then(function () {
+    //         return promiseAnimate(ball2,200)
+    //     })
+    //     .then(function () {
+    //         return promiseAnimate(ball3, 300)
+    //     })
+    //     .then(function () {
+    //         return promiseAnimate(ball3, 50)
+    //     })
+    //     .then(function () {
+    //         return promiseAnimate(ball2, 50)
+    //     })
+    //     .then(function () {
+    //         return promiseAnimate(ball1, 50)
+    //     })
+
+       async function promiseAnimates() {
+           await promiseAnimate(ball1,100)
+           await promiseAnimate(ball2, 200)
+           await promiseAnimate(ball3, 300)
+           await promiseAnimate(ball3, 50)
+           await promiseAnimate(ball2, 50)
+           await promiseAnimate(ball1, 50)
+
+       }
+       promiseAnimates()
+
+</script>
+</html>
